@@ -1,0 +1,317 @@
+### =============================================================
+###   NIVELIS API — TESTES DAS MUDANÇAS RECENTES
+### =============================================================
+###
+###   COMO USAR:
+###   1. Instale a extensão "REST Client" no VS Code
+###   2. Abra este arquivo
+###   3. Clique em "Send Request" acima de cada bloco
+###
+###   ALTERNATIVA: copia e cola no Postman ou Insomnia
+###
+### =============================================================
+
+@base8000 = http://127.0.0.1:8000
+@base8001 = http://127.0.0.1:8001
+@devUser = teste123
+@livroHazzan = 2e5803ac-d92c-4958-834c-138fdb42fc94
+
+
+### =============================================================
+###   GRUPO 1 — VERIFICAÇÕES BÁSICAS (gratuitas, sem Gemini)
+### =============================================================
+
+
+### 1.1 - Healthcheck (deve aparecer "versao: 2.1.0")
+GET {{base8000}}/
+
+
+### 1.2 - Métricas (mostra contagens e tokens)
+GET {{base8000}}/admin/metricas
+
+
+### 1.3 - Listar provas em cache
+GET {{base8000}}/admin/cache
+
+
+### 1.4 - Listar livros indexados
+GET {{base8000}}/livros
+
+
+### 1.5 - Detalhes do livro Hazzan (com capítulos identificados)
+GET {{base8000}}/livro/{{livroHazzan}}
+
+
+### 1.6 - ENADE disponíveis (lista anos e áreas)
+GET {{base8000}}/enade/disponiveis
+
+
+### 1.7 - ENADE de um ano específico
+GET {{base8000}}/enade/disponiveis?ano=2022
+
+
+### 1.8 - ENEM disponíveis
+GET {{base8000}}/enem/disponiveis
+
+
+### 1.9 - Concursos suportados
+GET {{base8000}}/concursos
+
+
+### 1.10 - Pool de questões (deve estar vazio)
+GET {{base8000}}/pool
+
+
+### 1.11 - Quota de tokens
+GET {{base8000}}/tokens
+
+
+### =============================================================
+###   GRUPO 2 — GERADOR DE QUESTÕES (questoes_api porta 8001)
+###   Testando: cadeia de fontes + não-regenerar + reforço
+### =============================================================
+
+
+### 2.1 - PRIMEIRA chamada — gera questões novas
+### Esperado: usa conhecimento do Gemini (sem reforço)
+### Custo: 1 chamada Gemini
+POST {{base8001}}/exercicios/gerar
+Content-Type: application/json
+
+{
+  "materia":    "filosofia",
+  "topico":     "etica_e_moral",
+  "quantidade": 3
+}
+
+
+### 2.2 - SEGUNDA chamada (mesmos params) — testa não-regenerar
+### Esperado: retorna do banco, custo_gemini = 0
+### Custo: 0 (CACHE HIT)
+POST {{base8001}}/exercicios/gerar
+Content-Type: application/json
+
+{
+  "materia":    "filosofia",
+  "topico":     "etica_e_moral",
+  "quantidade": 3
+}
+
+
+### 2.3 - FORÇAR regeneração mesmo se já existir
+### Esperado: gera novas, ignora o cache
+### Custo: 1 chamada Gemini
+POST {{base8001}}/exercicios/gerar?forcar=true
+Content-Type: application/json
+
+{
+  "materia":    "filosofia",
+  "topico":     "etica_e_moral",
+  "quantidade": 3
+}
+
+
+### 2.4 - Matemática (deve usar o Hazzan como reforço)
+### Esperado: livros_reforco com o Hazzan
+### Custo: 1 chamada Gemini
+POST {{base8001}}/exercicios/gerar
+Content-Type: application/json
+
+{
+  "materia":    "matematica",
+  "topico":     "combinatoria",
+  "quantidade": 3
+}
+
+
+### 2.5 - Português (sem livros/provas — testa fallback Gemini)
+### Esperado: livros_reforco e provas_reforco vazios
+### Custo: 1 chamada Gemini
+POST {{base8001}}/exercicios/gerar
+Content-Type: application/json
+
+{
+  "materia":    "portugues",
+  "topico":     "interpretacao_de_texto",
+  "quantidade": 3
+}
+
+
+### 2.6 - Com contexto específico
+### Esperado: questões com o contexto pedido
+### Custo: 1 chamada Gemini
+POST {{base8001}}/exercicios/gerar
+Content-Type: application/json
+
+{
+  "materia":    "atualidades",
+  "topico":     "meio_ambiente",
+  "quantidade": 2,
+  "contexto":   "queimadas no pantanal"
+}
+
+
+### =============================================================
+###   GRUPO 3 — GERADOR DE PROVA (simulados_api porta 8000)
+###   Testando: ENADE + ENEM + Livro com reforço de livros
+### =============================================================
+
+
+### 3.1 - ENADE Direito 2022 (já em cache)
+### Esperado: veio_do_cache=true, gera questões rápido
+### Custo: 1 chamada Gemini (só geração)
+POST {{base8000}}/enade/inspirar?ano=2022&area=direito&quantidade=3
+
+
+### 3.2 - ENADE Turismo 2022 (já em cache)
+### Esperado: veio_do_cache=true
+### Custo: 1 chamada Gemini
+POST {{base8000}}/enade/inspirar?ano=2022&area=turismo&quantidade=3
+
+
+### 3.3 - ENADE com DIFICULDADE específica
+### Esperado: questões só do nível pedido
+### Custo: 1 chamada Gemini
+POST {{base8000}}/enade/inspirar?ano=2022&area=direito&quantidade=3&dificuldade=dificil
+
+
+### 3.4 - ENADE com TÓPICO específico
+### Esperado: questões só sobre Maria da Penha
+### Custo: 1 chamada Gemini
+POST {{base8000}}/enade/inspirar?ano=2022&area=direito&quantidade=2&topico_especifico=maria%20da%20penha
+
+
+### 3.5 - VALIDAÇÃO ciclo trienal (deve dar erro 400)
+### Esperado: erro amigável sugerindo anos válidos
+### Custo: 0 (não chega no Gemini)
+POST {{base8000}}/enade/inspirar?ano=2022&area=medicina&quantidade=3
+
+
+### 3.6 - Testar busca de URL sem gastar Gemini
+### Esperado: mostra qual método encontrou o PDF
+### Custo: 0
+GET {{base8000}}/enade/testar-busca?ano=2022&area=direito
+
+
+### 3.7 - ENEM Matemática (primeira vez = baixa+analisa PDF)
+### Esperado: análise nova ou cache
+### Custo: 1-2 chamadas Gemini
+### ⚠️ Use uma área que JÁ analisou pra economizar
+POST {{base8000}}/enem/inspirar?ano=2024&area=matematica&quantidade=3
+
+
+### =============================================================
+###   GRUPO 4 — LIVROS (simulados_api porta 8000)
+###   Testando: geração baseada no livro indexado
+### =============================================================
+
+
+### 4.1 - Gerar questões do livro Hazzan inteiro
+### Esperado: 3 questões de combinatória/probabilidade
+### Custo: 1 chamada Gemini
+POST {{base8000}}/livro/inspirar?livro_id={{livroHazzan}}&quantidade=3
+
+
+### 4.2 - Gerar questões do CAPÍTULO 1 do Hazzan
+### Esperado: questões focadas no capítulo 1
+### Custo: 1 chamada Gemini
+POST {{base8000}}/livro/inspirar?livro_id={{livroHazzan}}&capitulo=1&quantidade=3
+
+
+### 4.3 - Com dificuldade (livro + dificil)
+### Esperado: questões nível difícil
+### Custo: 1 chamada Gemini
+POST {{base8000}}/livro/inspirar?livro_id={{livroHazzan}}&quantidade=2&dificuldade=dificil
+
+
+### 4.4 - Com tópico específico do livro
+### Esperado: questões só sobre arranjo
+### Custo: 1 chamada Gemini
+POST {{base8000}}/livro/inspirar?livro_id={{livroHazzan}}&quantidade=2&topico_especifico=arranjo
+
+
+### =============================================================
+###   GRUPO 5 — POOL DE QUESTÕES (geração em lote)
+###   Custo eficiente: gera 20 de uma vez, sorteia depois sem custo
+### =============================================================
+
+
+### 5.1 - Criar pool ENADE Direito (20 questões de uma vez)
+### Esperado: pool_id retornado
+### Custo: 1 chamada Gemini (mas gera 20 questões!)
+POST {{base8000}}/pool/gerar?concurso=enade&ano=2022&area=direito&quantidade=20
+
+
+### 5.2 - Listar pools criados
+GET {{base8000}}/pool
+
+
+### 5.3 - Sortear 5 questões do pool (GRÁTIS!)
+### ⚠️ Substitua POOL_ID pelo ID retornado em 5.1
+### Custo: 0 (vem do banco)
+GET {{base8000}}/pool/sortear/COLE_POOL_ID_AQUI?quantidade=5
+
+
+### 5.4 - Sortear mais 3 do mesmo pool (continua grátis)
+GET {{base8000}}/pool/sortear/COLE_POOL_ID_AQUI?quantidade=3
+
+
+### =============================================================
+###   GRUPO 6 — TESTANDO REFORÇO COMPLETO
+###   Cenário: combinar livro Hazzan + provas
+### =============================================================
+
+
+### 6.1 - Antes: ver que provas estão analisadas
+GET {{base8000}}/admin/cache
+
+
+### 6.2 - Gerar questões de matemática
+### Esperado:
+### - livros_reforco: [Hazzan]
+### - provas_reforco: [] (a menos que tenha analisado ENEM Mat)
+### Custo: 1 chamada Gemini
+POST {{base8001}}/exercicios/gerar
+Content-Type: application/json
+
+{
+  "materia":    "matematica",
+  "topico":     "probabilidade",
+  "quantidade": 3,
+  "forcar":     true
+}
+
+
+### =============================================================
+###   GRUPO 7 — SIMULAR FLUXO COMPLETO (autenticação dev)
+### =============================================================
+
+
+### 7.1 - Responder simulado (precisa de simulado_id real)
+### ⚠️ Substitua o SIMULADO_ID
+POST {{base8000}}/simulado/COLE_SIMULADO_ID/resultado
+Content-Type: application/json
+X-Dev-User-Id: {{devUser}}
+
+{
+  "respostas": {
+    "1": "B",
+    "2": "C",
+    "3": "A"
+  }
+}
+
+
+### 7.2 - Histórico do usuário dev
+GET {{base8000}}/historico
+X-Dev-User-Id: {{devUser}}
+
+
+### 7.3 - Estatísticas do usuário
+GET {{base8000}}/historico/estatisticas
+X-Dev-User-Id: {{devUser}}
+
+
+### =============================================================
+###   FIM DOS TESTES
+### =============================================================

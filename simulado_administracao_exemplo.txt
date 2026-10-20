@@ -1,0 +1,360 @@
+1. O controller de uma rede de farmácias reuniu os dados do mês: custos e despesas fixos de R$ 6.000,00, incluindo R$ 1.200,00 de depreciação; margem de contribuição unitária de R$ 10,00; lucro desejado pelos sócios de R$ 1.500,00. Qual é o ponto de equilíbrio financeiro, em unidades?
+   A) 600 unidades
+   B) 720 unidades
+   C) 450 unidades
+   D) 480 unidades
+   E) 750 unidades
+
+2. Uma rede de lojas de departamento compra um item por R$ 30,00 e precisa formar o preço de venda. As despesas variáveis representam 12% do preço, as despesas fixas 5% e o lucro desejado é de 15% sobre o preço de venda. Determine o preço de venda pelo método do markup.
+   A) R$ 34,50
+   B) R$ 44,12
+   C) R$ 64,88
+   D) R$ 39,60
+   E) R$ 56,60
+
+3. Considere a hierarquia das necessidades, no estudo da motivação no trabalho. Qual é a sua tese central?
+   A) o que motiva se organiza em cinco níveis, e um nível só passa a motivar depois que o anterior está razoavelmente satisfeito
+   B) a motivação depende de o esforço levar ao desempenho, o desempenho à recompensa, e a recompensa ter valor para a pessoa
+   C) a motivação decorre exclusivamente da remuneração recebida pelo trabalhador
+   D) os fatores higiênicos evitam a insatisfação mas não motivam; só os motivacionais, ligados ao conteúdo do trabalho, motivam
+   E) a teoria X supõe aversão ao trabalho e exige controle; a teoria Y supõe iniciativa e favorece a delegação
+
+4. Em uma revisão sobre motivação no trabalho, discute-se a teoria da expectância. Assinale a alternativa com seu autor.
+   A) David McClelland
+   B) Douglas McGregor
+   C) Abraham Maslow
+   D) Clayton Alderfer
+   E) Victor Vroom
+
+5. Em um projeto de reorganização, avalia-se a estrutura divisional, que agrupa por produto, cliente ou região geográfica. Assinale a alternativa que aponta seu ponto fraco.
+   A) aproxima a decisão do mercado, ao custo de duplicar funções em cada divisão
+   B) ganha flexibilidade e perde controle direto sobre o que foi terceirizado
+   C) impede a especialização técnica dos profissionais e obriga cada um a dominar todas as atividades
+   D) o subordinado responde a dois chefes, o que quebra a unidade de comando e exige negociação constante
+   E) favorece a especialização técnica, mas dificulta a coordenação entre áreas
+
+6. Ao comparar as correntes do pensamento administrativo, examina-se a teoria geral dos sistemas. Qual é a sua ênfase?
+   A) o processo de tomada de decisão
+   B) as pessoas e os grupos informais
+   C) as normas e a racionalidade formal
+   D) a tarefa executada no chão de fábrica
+   E) a organização como sistema aberto
+
+7. Uma fábrica de móveis estuda um projeto com investimento inicial de R$ 141.000,00, que gerará R$ 120.000,00 ao final do primeiro ano e R$ 100.000,00 ao final do segundo. A taxa mínima de atratividade é de 25% ao ano. Qual é o valor presente líquido do projeto?
+   A) R$ 19.000,00
+   B) R$ 35.000,00
+   C) R$ -19.000,00
+   D) R$ 220.000,00
+   E) R$ 79.000,00
+
+8. Uma empresa de software apura custos e despesas fixos mensais de R$ 16.000,00, dos quais R$ 4.800,00 correspondem a depreciação. A margem de contribuição unitária é de R$ 40,00 e a diretoria estabeleceu lucro desejado de R$ 2.400,00 no período. Determine o ponto de equilíbrio contábil.
+   A) 340 unidades
+   B) 400 unidades
+   C) 520 unidades
+   D) 460 unidades
+   E) 280 unidades
+
+9. Uma confecção produziu 1.500 unidades no mês. O custo variável unitário foi de R$ 40,00 e os custos fixos de produção somaram R$ 12.000,00. O custo unitário apurado por absorção é de:
+   A) R$ 40,00
+   B) R$ 12.040,00
+   C) R$ 48,00
+   D) R$ 56,00
+   E) R$ 8,00
+
+10. Uma distribuidora de alimentos apurou custo das mercadorias vendidas de R$ 900.000,00 no ano e estoque médio de R$ 100.000,00. Qual é o prazo médio de estocagem, em dias, considerando o ano comercial de 360 dias?
+   A) 9 dias
+   B) 108 dias
+   C) 40 dias
+   D) 41 dias
+   E) 80 dias
+
+11. Uma indústria de alimentos produziu 1.200 unidades no mês. O custo variável unitário foi de R$ 15,00 e os custos fixos de produção somaram R$ 14.400,00. Determine o custo unitário por absorção.
+   A) R$ 27,00
+   B) R$ 14.415,00
+   C) R$ 15,00
+   D) R$ 39,00
+   E) R$ 12,00
+
+12. O ciclo administrativo é descrito por quatro funções. Considere a função de planejar. Assinale a alternativa que a define.
+   A) distribuir recursos, tarefas e autoridade
+   B) definir objetivos e o caminho para alcançá-los
+   C) conduzir e coordenar as pessoas para executar o planejado
+   D) negociar preços e condições com fornecedores externos
+   E) registrar as operações para fins contábeis e fiscais
+
+13. Um atacadista de bebidas compra um item por R$ 20,00 e precisa formar o preço de venda. As despesas variáveis representam 15% do preço, as despesas fixas 8% e o lucro desejado é de 30% sobre o preço de venda. Determine o preço de venda pelo método do markup.
+   A) R$ 25,97
+   B) R$ 30,60
+   C) R$ 90,54
+   D) R$ 42,55
+   E) R$ 26,00
+
+14. Um projeto apresentado à diretoria de uma metalúrgica requer R$ 400.000,00 de aporte inicial e promete entradas líquidas anuais e uniformes de R$ 80.000,00. O prazo de retorno simples do investimento é de:
+   A) 5 anos
+   B) 6 anos
+   C) 20 anos
+   D) 10 anos
+   E) 4 anos
+
+15. Um veículo comprado por uma transportadora custou R$ 50.000,00, tem vida útil de 4 anos e valor residual previsto de R$ 7.500,00. A cota anual de depreciação pelo método linear é de:
+   A) R$ 10.625,00
+   B) R$ 14.166,67
+   C) R$ 12.500,00
+   D) R$ 885,42
+   E) R$ 3.541,67
+
+16. Na análise das demonstrações de uma indústria de alimentos, levantaram-se os saldos: disponível de R$ 20.000,00, estoques de R$ 60.000,00, outras contas circulantes de R$ 90.000,00, realizável a longo prazo de R$ 20.000,00, passivo circulante de R$ 100.000,00 e passivo não circulante de R$ 100.000,00. O índice de liquidez corrente é de:
+   A) 0,59
+   B) 1,70
+   C) 0,95
+   D) 2,30
+   E) 1,10
+
+17. Considere a estrutura organizacional matricial, que cruza a especialidade funcional com a gestão por projeto. Assinale a alternativa que aponta seu ponto fraco.
+   A) quem aconselha não decide, e o desgaste sobre até onde vai a recomendação e onde começa a ordem é permanente
+   B) impede a especialização técnica dos profissionais e obriga cada um a dominar todas as atividades
+   C) favorece a especialização técnica, mas dificulta a coordenação entre áreas
+   D) elimina a necessidade de coordenação entre as áreas e dispensa qualquer instância de integração
+   E) o subordinado responde a dois chefes, o que quebra a unidade de comando e exige negociação constante
+
+18. Em uma distribuidora de alimentos, o preço de venda de cada unidade é R$ 80,00. O custo variável unitário é de R$ 43,00 e a comissão paga ao vendedor é de R$ 6,00 por unidade. A margem de contribuição unitária é de:
+   A) R$ 37,00
+   B) R$ 43,00
+   C) R$ 49,00
+   D) R$ 31,00
+   E) R$ 25,00
+
+19. O balanço de uma gráfica apresenta: disponível R$ 60.000,00, estoques R$ 80.000,00, demais contas do ativo circulante R$ 50.000,00, realizável a longo prazo R$ 60.000,00, passivo circulante R$ 100.000,00 e passivo não circulante R$ 100.000,00. Calcule a liquidez seca.
+   A) 1,90
+   B) 1,10
+   C) 1,25
+   D) 0,60
+   E) 2,70
+
+20. No exercício encerrado, uma indústria de alimentos apurou receita líquida de R$ 500.000,00, lucro operacional de R$ 117.000,00, lucro líquido de R$ 89.000,00, ativo total de R$ 976.000,00 e patrimônio líquido de R$ 660.000,00. Qual é o retorno sobre o patrimônio líquido (ROE)?
+   A) 13,48%
+   B) 9,12%
+   C) 17,80%
+   D) 23,40%
+   E) 11,99%
+
+21. Porter descreve três estratégias competitivas genéricas. Considere a enfoque. Em que ela consiste?
+   A) crescer por aquisição de concorrentes diretos
+   B) manter preço e produto iguais aos da média do setor
+   C) ser o produtor de menor custo do setor, atendendo a um mercado amplo
+   D) distribuir o investimento igualmente entre todos os segmentos
+   E) concentrar-se em um segmento estreito, por custo ou por diferenciação
+
+22. No exercício, uma rede de farmácias registrou CMV de R$ 120.000,00 e manteve estoque médio de R$ 30.000,00. Qual é o prazo médio de estocagem, em dias, considerando o ano comercial de 360 dias?
+   A) 72 dias
+   B) 48 dias
+   C) 92 dias
+   D) 90 dias
+   E) 4 dias
+
+23. Determinada escola da administração organiza-se em torno da tarefa executada no chão de fábrica. Assinale a alternativa que a identifica.
+   A) teoria comportamental
+   B) teoria clássica
+   C) teoria geral dos sistemas
+   D) administração científica
+   E) teoria da burocracia
+
+24. Um veículo comprado por uma confecção custou R$ 40.000,00, tem vida útil de 10 anos e valor residual previsto de R$ 4.000,00. Pelo método linear, qual é a depreciação anual?
+   A) R$ 4.000,00
+   B) R$ 300,00
+   C) R$ 3.000,00
+   D) R$ 3.600,00
+   E) R$ 4.400,00
+
+25. Observe a seguinte situação de trabalho: a equipe elabora o orçamento do semestre e estabelece os prazos de cada etapa do projeto. O processo administrativo compreende quatro funções. Trata-se do exercício da função de:
+   A) planejar
+   B) supervisionar
+   C) organizar
+   D) controlar
+   E) coordenar
+
+26. No exercício encerrado, uma fábrica de componentes eletrônicos apurou receita líquida de R$ 1.000.000,00, lucro operacional de R$ 231.000,00, lucro líquido de R$ 173.000,00, ativo total de R$ 1.189.000,00 e patrimônio líquido de R$ 616.000,00. Determine o retorno sobre o ativo (ROA), com base no lucro operacional.
+   A) 37,50%
+   B) 14,55%
+   C) 19,43%
+   D) 17,30%
+   E) 28,08%
+
+27. Porter descreve três estratégias competitivas genéricas. Considere a liderança em custo. Essa estratégia consiste em:
+   A) manter preço e produto iguais aos da média do setor
+   B) crescer por aquisição de concorrentes diretos
+   C) oferecer algo percebido como único no setor, atendendo a um mercado amplo
+   D) concentrar-se em um segmento estreito, por custo ou por diferenciação
+   E) ser o produtor de menor custo do setor, atendendo a um mercado amplo
+
+28. Um projeto submetido a uma fábrica de móveis exige aporte de R$ 130.000,00 hoje e devolve R$ 100.000,00 em um ano e R$ 60.000,00 em dois anos, a uma taxa de desconto de 10% ao ano. Determine o valor presente líquido.
+   A) R$ -10.495,87
+   B) R$ 10.495,87
+   C) R$ 160.000,00
+   D) R$ 30.000,00
+   E) R$ 15.454,55
+
+29. O balanço de uma confecção apresenta: disponível R$ 60.000,00, estoques R$ 60.000,00, demais contas do ativo circulante R$ 70.000,00, realizável a longo prazo R$ 60.000,00, passivo circulante R$ 150.000,00 e passivo não circulante R$ 80.000,00. Calcule a liquidez corrente.
+   A) 1,09
+   B) 0,87
+   C) 0,79
+   D) 0,40
+   E) 1,27
+
+30. Uma empresa de software avalia um projeto que exige investimento inicial de R$ 135.000,00 e deve gerar fluxo de caixa líquido de R$ 30.000,00 por ano, de forma constante. O prazo de retorno simples do investimento é de:
+   A) 3,50 anos
+   B) 9 anos
+   C) 4,50 anos
+   D) 22,22 anos
+   E) 2,25 anos
+
+============================================================
+GABARITO
+============================================================
+1. D   [Administração (custos)]
+O ponto de equilíbrio financeiro é (R$ 6.000,00 − R$ 1.200,00) ÷ R$ 10,00 = 480 unidades.
+
+Os três se distinguem pelo NUMERADOR: o contábil usa os custos fixos como estão; o financeiro desconta a depreciação, que reduz o lucro mas não sai do caixa; o econômico acrescenta o lucro desejado. Daí a ordem invariável: financeiro (480 unidades) < contábil (600 unidades) < econômico (750 unidades).
+
+2. B   [Administração (formação de preço)]
+Os percentuais incidem sobre o PREÇO, não sobre o custo — por isso se divide, e não se soma.
+
+Markup divisor = 1 − (12% + 5% + 15%) = 0,68
+Preço = R$ 30,00 ÷ 0,68 = R$ 44,12.
+
+Somar 32% ao custo daria R$ 39,60, que não cobre as despesas: elas são calculadas sobre o preço maior, não sobre o custo.
+
+3. A   [Administração (gestão de pessoas)]
+A hierarquia das necessidades, de Abraham Maslow, sustenta que o que motiva se organiza em cinco níveis, e um nível só passa a motivar depois que o anterior está razoavelmente satisfeito.
+
+4. E   [Administração (gestão de pessoas)]
+A teoria da expectância, de Victor Vroom, sustenta que a motivação depende de o esforço levar ao desempenho, o desempenho à recompensa, e a recompensa ter valor para a pessoa.
+
+5. A   [Administração (estrutura organizacional)]
+A estrutura divisional agrupa por produto, cliente ou região geográfica. Em contrapartida, aproxima a decisão do mercado, ao custo de duplicar funções em cada divisão.
+
+6. E   [Administração (teorias da administração)]
+A teoria geral dos sistemas, de Ludwig von Bertalanffy, tem como ênfase a organização como sistema aberto. Sua contribuição central é o ciclo de entradas, processamento, saídas e retroalimentação.
+
+7. A   [Administração (análise de investimentos)]
+Cada entrada volta ao presente pelo número de períodos que a separa de hoje:
+  R$ 120.000,00 ÷ 1,25 = R$ 96.000,00
+  R$ 100.000,00 ÷ 1,25² = R$ 64.000,00
+Somadas dão R$ 160.000,00; descontado o aporte de R$ 141.000,00, o VPL é R$ 19.000,00.
+
+VPL positivo significa que o projeto rende ACIMA da taxa exigida — não que ele simplesmente dá lucro.
+
+8. B   [Administração (custos)]
+O ponto de equilíbrio contábil é R$ 16.000,00 ÷ R$ 40,00 = 400 unidades.
+
+Os três se distinguem pelo NUMERADOR: o contábil usa os custos fixos como estão; o financeiro desconta a depreciação, que reduz o lucro mas não sai do caixa; o econômico acrescenta o lucro desejado. Daí a ordem invariável: financeiro (280 unidades) < contábil (400 unidades) < econômico (460 unidades).
+
+9. C   [Administração (custos)]
+No custeio por ABSORÇÃO o custo fixo de produção é rateado pela quantidade e entra no custo do produto: R$ 40,00 + R$ 12.000,00 ÷ 1.500 = R$ 48,00.
+
+No custeio VARIÁVEL o mesmo custo fixo seria tratado como despesa do período, e o unitário ficaria em R$ 40,00. Só a absorção é aceita para fins societários e fiscais; o variável serve à decisão gerencial.
+
+10. C   [Administração (gestão de estoques)]
+Giro do estoque = CMV ÷ estoque médio = R$ 900.000,00 ÷ R$ 100.000,00 = 9 vezes no período.
+
+O prazo médio de estocagem é o mesmo dado pelo outro lado: 360 ÷ 9 = 40 dias. Giro alto e prazo curto descrevem a mesma situação — o estoque se renova depressa.
+
+11. A   [Administração (custos)]
+No custeio por ABSORÇÃO o custo fixo de produção é rateado pela quantidade e entra no custo do produto: R$ 15,00 + R$ 14.400,00 ÷ 1.200 = R$ 27,00.
+
+No custeio VARIÁVEL o mesmo custo fixo seria tratado como despesa do período, e o unitário ficaria em R$ 15,00. Só a absorção é aceita para fins societários e fiscais; o variável serve à decisão gerencial.
+
+12. B   [Administração (processo administrativo)]
+A função de planejar consiste em definir objetivos e o caminho para alcançá-los. É a primeira função e condiciona as demais: sem objetivo definido não há como organizar recursos nem medir resultado.
+
+As quatro funções formam um ciclo — planejar, organizar, dirigir e controlar —, e o controle realimenta o planejamento.
+
+13. D   [Administração (formação de preço)]
+Os percentuais incidem sobre o PREÇO, não sobre o custo — por isso se divide, e não se soma.
+
+Markup divisor = 1 − (15% + 8% + 30%) = 0,47
+Preço = R$ 20,00 ÷ 0,47 = R$ 42,55.
+
+Somar 53% ao custo daria R$ 30,60, que não cobre as despesas: elas são calculadas sobre o preço maior, não sobre o custo.
+
+14. A   [Administração (análise de investimentos)]
+Com fluxo uniforme, o payback simples é o investimento dividido pela entrada anual: R$ 400.000,00 ÷ R$ 80.000,00 = 5 anos.
+
+É uma medida de prazo, não de rentabilidade: ignora o valor do dinheiro no tempo e tudo o que entra depois do retorno. Por isso serve como filtro de risco, e não como critério único de decisão.
+
+15. A   [Administração (contabilidade)]
+Deprecia-se o que o bem PERDE, não o que ele custou: subtrai-se o valor residual antes de dividir pela vida útil.
+
+(R$ 50.000,00 − R$ 7.500,00) ÷ 4 = R$ 10.625,00 por ano.
+
+16. B   [Administração (análise de balanço)]
+Liquidez corrente = ativo circulante ÷ passivo circulante.
+
+O resultado é 1,70, ou seja, a empresa dispõe de R$ 1,70 para cada real de obrigação considerada. O que muda entre os índices é o que se admite como recurso: a imediata conta só o caixa, a seca exclui o estoque por ser o ativo de realização mais lenta, a corrente aceita todo o circulante e a geral estende a conta ao longo prazo dos dois lados.
+
+17. E   [Administração (estrutura organizacional)]
+A estrutura matricial cruza a especialidade funcional com a gestão por projeto. Em contrapartida, o subordinado responde a dois chefes, o que quebra a unidade de comando e exige negociação constante.
+
+18. D   [Administração (custos)]
+A margem de contribuição unitária é o que sobra do preço depois de TODOS os gastos variáveis, e é ela que paga os custos fixos. Aqui: R$ 80,00 − R$ 43,00 − R$ 6,00 = R$ 31,00. A comissão entra no cálculo por ser gasto variável; deixá-la de fora é o erro mais comum.
+
+19. B   [Administração (análise de balanço)]
+Liquidez seca = (ativo circulante − estoques) ÷ passivo circulante.
+
+O resultado é 1,10, ou seja, a empresa dispõe de R$ 1,10 para cada real de obrigação considerada. O que muda entre os índices é o que se admite como recurso: a imediata conta só o caixa, a seca exclui o estoque por ser o ativo de realização mais lenta, a corrente aceita todo o circulante e a geral estende a conta ao longo prazo dos dois lados.
+
+20. A   [Administração (análise de balanço)]
+Retorno sobre o patrimônio líquido (ROE) = lucro líquido ÷ patrimônio líquido = 13,48%.
+
+Cada índice responde a uma pergunta diferente: o ROA mede o que o ativo inteiro produz, independentemente de quem o financiou; o ROE mede o que sobra para o sócio sobre o capital dele; a margem líquida mede quanto de cada real vendido vira lucro. Trocar o numerador entre eles é o erro que a questão procura.
+
+21. E   [Administração (planejamento estratégico)]
+A estratégia de enfoque consiste em concentrar-se em um segmento estreito, por custo ou por diferenciação.
+
+As três genéricas combinam duas decisões: a fonte da vantagem — custo ou diferenciação — e a amplitude do mercado. O enfoque é a escolha de atuar em alvo estreito, por qualquer das duas fontes.
+
+22. D   [Administração (gestão de estoques)]
+Giro do estoque = CMV ÷ estoque médio = R$ 120.000,00 ÷ R$ 30.000,00 = 4 vezes no período.
+
+O prazo médio de estocagem é o mesmo dado pelo outro lado: 360 ÷ 4 = 90 dias. Giro alto e prazo curto descrevem a mesma situação — o estoque se renova depressa.
+
+23. D   [Administração (teorias da administração)]
+A administração científica, de Frederick Taylor, tem como ênfase a tarefa executada no chão de fábrica. Sua contribuição central é o estudo de tempos e movimentos e a seleção científica do trabalhador.
+
+24. D   [Administração (contabilidade)]
+Deprecia-se o que o bem PERDE, não o que ele custou: subtrai-se o valor residual antes de dividir pela vida útil.
+
+(R$ 40.000,00 − R$ 4.000,00) ÷ 10 = R$ 3.600,00 por ano.
+
+25. A   [Administração (processo administrativo)]
+A situação descreve a função de planejar: definir objetivos e o caminho para alcançá-los. É a primeira função e condiciona as demais: sem objetivo definido não há como organizar recursos nem medir resultado.
+
+As quatro funções formam um ciclo — planejar, organizar, dirigir e controlar —, e o controle realimenta o planejamento.
+
+26. C   [Administração (análise de balanço)]
+Retorno sobre o ativo (ROA), com base no lucro operacional = lucro operacional ÷ ativo total = 19,43%.
+
+Cada índice responde a uma pergunta diferente: o ROA mede o que o ativo inteiro produz, independentemente de quem o financiou; o ROE mede o que sobra para o sócio sobre o capital dele; a margem líquida mede quanto de cada real vendido vira lucro. Trocar o numerador entre eles é o erro que a questão procura.
+
+27. E   [Administração (planejamento estratégico)]
+A estratégia de liderança em custo consiste em ser o produtor de menor custo do setor, atendendo a um mercado amplo.
+
+As três genéricas combinam duas decisões: a fonte da vantagem — custo ou diferenciação — e a amplitude do mercado. O enfoque é a escolha de atuar em alvo estreito, por qualquer das duas fontes.
+
+28. B   [Administração (análise de investimentos)]
+Cada entrada volta ao presente pelo número de períodos que a separa de hoje:
+  R$ 100.000,00 ÷ 1,10 = R$ 90.909,09
+  R$ 60.000,00 ÷ 1,10² = R$ 49.586,78
+Somadas dão R$ 140.495,87; descontado o aporte de R$ 130.000,00, o VPL é R$ 10.495,87.
+
+VPL positivo significa que o projeto rende ACIMA da taxa exigida — não que ele simplesmente dá lucro.
+
+29. E   [Administração (análise de balanço)]
+Liquidez corrente = ativo circulante ÷ passivo circulante.
+
+O resultado é 1,27, ou seja, a empresa dispõe de R$ 1,27 para cada real de obrigação considerada. O que muda entre os índices é o que se admite como recurso: a imediata conta só o caixa, a seca exclui o estoque por ser o ativo de realização mais lenta, a corrente aceita todo o circulante e a geral estende a conta ao longo prazo dos dois lados.
+
+30. C   [Administração (análise de investimentos)]
+Com fluxo uniforme, o payback simples é o investimento dividido pela entrada anual: R$ 135.000,00 ÷ R$ 30.000,00 = 4,50 anos.
+
+É uma medida de prazo, não de rentabilidade: ignora o valor do dinheiro no tempo e tudo o que entra depois do retorno. Por isso serve como filtro de risco, e não como critério único de decisão.

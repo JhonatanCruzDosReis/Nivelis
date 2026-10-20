@@ -1,0 +1,161 @@
+rules_version = '2';
+
+// ═══════════════════════════════════════════════════════════════════════════
+//   NIVELIS — regras do Firestore
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// POR QUE ISTO EXISTE
+//
+// A apiKey do Firebase que vai no aplicativo é PÚBLICA por construção —
+// qualquer pessoa extrai do pacote instalado. Ela não é segredo e não
+// protege nada: quem decide o que cada um pode ler e escrever é este
+// arquivo, e só ele. Sem regras versionadas, o que vale é o que está no
+// console, sem como revisar, sem como restaurar e sem como saber se alguém
+// mudou.
+//
+// Em modo de teste (`allow read, write: if true`), qualquer pessoa com a
+// apiKey apagaria o banco de questões inteiro ou inverteria gabaritos, sem
+// nem abrir o aplicativo.
+//
+// A REGRA GERAL AQUI
+//
+//   CONTEÚDO (questões, simulados, gabaritos, livros): o aplicativo LÊ,
+//   nunca escreve. Quem escreve é a API, pelo Admin SDK, que passa por fora
+//   destas regras por ser servidor de confiança. Por isso `write: if false`
+//   não atrapalha a API em nada.
+//
+//   DADO DE USUÁRIO (perfil, cronograma, resultado, questões feitas): só o
+//   dono, comparando com request.auth.uid, que vem do token do Firebase e
+//   ninguém forja.
+//
+//   TUDO O MAIS: negado. A última regra deste arquivo fecha a porta para
+//   qualquer coleção que surgir depois e que ninguém lembrou de proteger —
+//   é o oposto de como o modo dev da API estava, que abria quando a
+//   configuração faltava.
+//
+// COMO PUBLICAR
+//
+//   firebase deploy --only firestore:rules
+//
+//   Ou cole no console: Firestore Database > Regras > Publicar.
+//   Antes de publicar, teste no simulador de regras do console: tente ler
+//   `questoes` deslogado (deve NEGAR) e escrever em `questoes` logado
+//   (deve NEGAR).
+//
+// ═══════════════════════════════════════════════════════════════════════════
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Ajudantes ────────────────────────────────────────────────────────
+    function logado() {
+      return request.auth != null;
+    }
+
+    function dono(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // ── CONTEÚDO DE ESTUDO ───────────────────────────────────────────────
+    //
+    // Leitura exige login porque o aplicativo manda para a tela de Login
+    // quando não há sessão (routes/index.tsx) — ou seja, ninguém chega nas
+    // questões deslogado, e exigir token aqui não custa nada e fecha o
+    // acesso de quem só extraiu a apiKey.
+    //
+    // Escrita bloqueada para TODO MUNDO no cliente. Até o próprio aplicativo
+    // perdeu essa permissão: o syncToFirestore, que gravava questões e
+    // simulados gerados direto aqui, foi removido justamente para esta
+    // linha poder ser `false`. Simulado gerado agora fica guardado no
+    // aparelho.
+    match /questoes/{documento} {
+      allow read:  if logado();
+      allow write: if false;
+    }
+
+    match /simulados/{documento} {
+      allow read:  if logado();
+      allow write: if false;
+    }
+
+    // Gabarito separado do simulado. O aplicativo NÃO lê esta coleção —
+    // conferido, não há uma única referência a 'gabaritos' no cliente. Então
+    // fica fechada dos dois lados: só a API enxerga.
+    match /gabaritos/{documento} {
+      allow read, write: if false;
+    }
+
+    match /livros/{documento} {
+      allow read:  if logado();
+      allow write: if false;
+    }
+
+    match /topicos/{documento} {
+      allow read:  if logado();
+      allow write: if false;
+    }
+
+    match /materias/{documento} {
+      allow read:  if logado();
+      allow write: if false;
+    }
+
+    // ── COISAS DE SERVIDOR ───────────────────────────────────────────────
+    //
+    // Nada disto é do aplicativo. uso_tokens e limite_diario dizem quanto da
+    // cota paga do Gemini já foi gasta; provas_analisadas e cache_noticias
+    // são cache interno. Fechados dos dois lados.
+    match /uso_tokens/{documento}        { allow read, write: if false; }
+    match /limite_diario/{documento}     { allow read, write: if false; }
+    match /provas_analisadas/{documento} { allow read, write: if false; }
+    match /provas_processadas/{documento}{ allow read, write: if false; }
+    match /cache_noticias/{documento}    { allow read, write: if false; }
+    match /pools_questoes/{documento}    { allow read, write: if false; }
+    match /sessoes_exercicio/{documento} { allow read, write: if false; }
+    match /resultados_exercicio/{documento} { allow read, write: if false; }
+
+    // ── DADO DE USUÁRIO ──────────────────────────────────────────────────
+
+    // Perfil. O documento tem o uid como id, então a comparação é direta.
+    match /users/{uid} {
+      allow read, write: if dono(uid);
+
+      // Cronograma de estudos, pendurado no usuário.
+      match /cronogramas/{documento} {
+        allow read, write: if dono(uid);
+      }
+
+      // Qualquer outra subcoleção que apareça: mesma regra, só o dono.
+      match /{resto=**} {
+        allow read, write: if dono(uid);
+      }
+    }
+
+    // Memória de quais questões a pessoa já respondeu. Id do documento = uid.
+    match /questoes_feitas/{uid} {
+      allow read, write: if dono(uid);
+    }
+
+    // Resultado de simulado. O cliente só CRIA, e só em nome de si mesmo:
+    // o campo usuario_uid tem que bater com quem está logado — é isto que
+    // impede alguém de inventar resultado no nome de outra pessoa.
+    //
+    // Alterar e apagar ficam de fora de propósito: resultado é registro
+    // histórico, e quem precisa mexer é a API.
+    match /resultados/{documento} {
+      allow create: if logado()
+                    && request.resource.data.usuario_uid == request.auth.uid;
+      allow read:   if logado()
+                    && resource.data.usuario_uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // ── PORTA FECHADA ────────────────────────────────────────────────────
+    //
+    // Vale para toda coleção não listada acima, inclusive as que ainda nem
+    // existem. Coleção nova nasce protegida e só se abre por escrito, aqui.
+    match /{documento=**} {
+      allow read, write: if false;
+    }
+  }
+}

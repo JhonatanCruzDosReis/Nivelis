@@ -1,0 +1,70 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  ESTE ARQUIVO IMPEDE QUE SUAS CHAVES VÃO PARA O GITHUB.
+#
+#  Um `git add -A` sem ele publica a credencial do Firebase e o .env no
+#  repositório — e, uma vez enviado, o segredo está comprometido mesmo que
+#  você apague depois: ele continua no histórico.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Segredos ────────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# Credenciais.
+#
+# Os padrões são AMPLOS de propósito. A versão anterior listava
+# `chave-firebase.json` pelo nome exato — e na pasta havia um
+# `chave-nivelis.json`, que passou batido. Adivinhar o nome do arquivo de
+# segredo é exatamente como esta regra falha, então qualquer coisa com
+# "chave" ou "credential" no nome fica de fora.
+*chave*.json
+*service-account*.json
+*serviceaccount*.json
+*-credentials.json
+*_credentials.json
+firebase-adminsdk*.json
+*.pem
+*.key
+*.p12
+
+# ── Backups gerados pelos scripts ───────────────────────────────────────────
+#
+# O padrão é um só e amplo pelo mesmo motivo acima: o `apagar_cpf.py` escreve
+# `backup_cpf_*.json`, que CONTÉM os CPFs. Listar um a um garante que o
+# próximo script a nascer passe despercebido.
+backup_*.json
+
+# ── Saída de depuração ──────────────────────────────────────────────────────
+debug_erro_*.txt
+debug_*.txt
+
+# ── Cópias visíveis dos arquivos ocultos ────────────────────────────────────
+#
+# O Windows esconde arquivos que começam com ponto, então os pacotes vêm com
+# uma cópia .txt do .gitignore e do .env.example só para você conseguir vê-los
+# ao descompactar. Elas NÃO devem entrar no repositório — são duplicatas que
+# envelhecem e passam a contradizer o original.
+gitignore.txt
+env.example.txt
+
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# ── Dados locais ────────────────────────────────────────────────────────────
+*.db
+*.sqlite3
+provas_baixadas/
+livros_pdf/
+
+# ── Sistema e editores ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/

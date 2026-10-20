@@ -1,0 +1,58 @@
+# =============================================================
+#  RENDER — Configuração de Deploy
+# =============================================================
+# Esse arquivo configura o serviço Web no Render.com automaticamente.
+# Não precisa editar manualmente o painel.
+#
+# COMO USAR:
+#  1. Coloca esse arquivo na raiz do repositório
+#  2. Conecta o GitHub no Render
+#  3. Render detecta esse render.yaml e configura sozinho
+# =============================================================
+
+services:
+  - type: web
+    name: nivelis-api
+    env: python
+    plan: free                                 # 512MB RAM, dorme após 15min
+    region: oregon                             # mais barato e estável
+
+    buildCommand: |
+      pip install -r requirements.txt
+
+    startCommand: |
+      uvicorn nivelis_api:app --host 0.0.0.0 --port $PORT
+
+    # Variáveis de ambiente
+    # IMPORTANTE: você vai configurar essas DIRETO NO PAINEL do Render,
+    # não aqui no arquivo (porque tem dados sensíveis)
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+
+      # ── CONFIGURE NO PAINEL DO RENDER (aqui não, são dados sensíveis) ──
+      #
+      # OBRIGATÓRIAS
+      # - FIREBASE_CREDENTIALS      conteúdo JSON da chave do Firebase
+      # - DESABILITAR_DETALHES_ERRO = true     esconde o detalhe do erro
+      # - ADMIN_SEGREDO             string longa e aleatória, inventada por
+      #                             você. Sem ela, as rotas /admin/*, as de
+      #                             extrair prova e o DELETE respondem 503 —
+      #                             fechadas, que é o lado seguro de falhar.
+      #
+      # OPCIONAIS
+      # - CORS_ORIGENS     origens que podem chamar a API de um NAVEGADOR,
+      #                    separadas por vírgula. NÃO precisa definir se você
+      #                    só tem o aplicativo: o React Native não manda
+      #                    cabeçalho Origin e não passa por CORS. Sem ela,
+      #                    vale só localhost. Só crie se tiver página web.
+      # - GEMINI_API_KEY   só a extração de PDF usa. Sem ela a API sobe
+      #                    normal e só /enade/extrair e /enem/extrair ficam fora.
+      # - GNEWS_API_KEY    notícias. Use uma chave NOVA: a antiga esteve
+      #                    exposta no bundle do app.
+      #
+      # NÃO CONFIGURE
+      # - MODO_DEV         liga o login por header X-Dev-User-Id, que deixa
+      #                    qualquer um se passar por qualquer usuário. Serve
+      #                    só para testar no Swagger, na sua máquina.
+      #                    Deixar de fora é o certo: o padrão é fechado.

@@ -1,0 +1,125 @@
+### =============================================================
+###   NIVELIS API — Exemplos de Requests
+### =============================================================
+###
+###   COMO USAR:
+###     Instala extensão "REST Client" no VS Code, abre este
+###     arquivo e clica em "Send Request" acima de cada bloco.
+###
+###     Alternativa: copia e cola no Postman/Insomnia.
+###
+###   BASE_URL: ajuste conforme onde a API está rodando
+### =============================================================
+
+@base = http://localhost:8000
+@devUser = teste123
+
+
+### --- HEALTH CHECK ---
+GET {{base}}/
+
+
+### --- LISTAR CONCURSOS SUPORTADOS ---
+GET {{base}}/concursos
+
+
+### --- LISTAR ANOS E ÁREAS DISPONÍVEIS DO ENADE ---
+GET {{base}}/enade/disponiveis
+
+
+### --- LISTAR ÁREAS DE UM ANO ESPECÍFICO ---
+GET {{base}}/enade/disponiveis?ano=2022
+
+
+### --- GERAR QUESTÕES INSPIRADAS (rota principal) ---
+###     Direito 2022, 3 questões
+POST {{base}}/enade/inspirar?ano=2022&area=direito&quantidade=3
+
+
+### --- GERAR QUESTÕES (área que dispara fallback) ---
+###     Relações Internacionais 2022 — testa busca automática
+POST {{base}}/enade/inspirar?ano=2022&area=relacoes_internacionais&quantidade=3
+
+
+### --- TESTAR VALIDAÇÃO CICLO TRIENAL ---
+###     Medicina em 2022 — deve retornar 400 com sugestão de ano
+POST {{base}}/enade/inspirar?ano=2022&area=medicina&quantidade=3
+
+
+### --- BUSCAR SIMULADO ---
+###     Substitua o UUID por um real retornado por /enade/inspirar
+GET {{base}}/simulado/SUBSTITUA_PELO_ID
+
+
+### =============================================================
+###   ROTAS AUTENTICADAS
+###   Usando modo dev (X-Dev-User-Id)
+### =============================================================
+
+
+### --- CORRIGIR SIMULADO ---
+POST {{base}}/simulado/SUBSTITUA_PELO_ID/resultado
+Content-Type: application/json
+X-Dev-User-Id: {{devUser}}
+
+{
+  "respostas": {
+    "1": "B",
+    "2": "C",
+    "3": "A"
+  }
+}
+
+
+### --- HISTÓRICO DO USUÁRIO ---
+GET {{base}}/historico
+X-Dev-User-Id: {{devUser}}
+
+
+### --- HISTÓRICO COM LIMITE ---
+GET {{base}}/historico?limite=5
+X-Dev-User-Id: {{devUser}}
+
+
+### --- ESTATÍSTICAS DO USUÁRIO ---
+GET {{base}}/historico/estatisticas
+X-Dev-User-Id: {{devUser}}
+
+
+### --- DETALHES DE UM RESULTADO ---
+###     Substitua RESULTADO_ID por um real retornado
+GET {{base}}/resultado/SUBSTITUA_RESULTADO_ID
+X-Dev-User-Id: {{devUser}}
+
+
+### =============================================================
+###   TESTES COM FIREBASE AUTH (produção)
+### =============================================================
+
+
+### --- USANDO TOKEN REAL DO FIREBASE ---
+###     Substitua TOKEN pelo idToken retornado pelo Firebase Auth
+GET {{base}}/historico
+Authorization: Bearer SUBSTITUA_PELO_TOKEN_REAL
+
+
+### =============================================================
+###   ROTAS DE MONITORAMENTO
+### =============================================================
+
+
+### --- TOKENS USADOS HOJE ---
+GET {{base}}/tokens
+
+
+### --- LIMITE DIÁRIO ---
+GET {{base}}/limite-diario
+
+
+### =============================================================
+###   ROTAS PARA APAGAR (CUIDADO)
+### =============================================================
+
+
+### --- DELETAR SIMULADO ---
+DELETE {{base}}/simulado/SUBSTITUA_PELO_ID

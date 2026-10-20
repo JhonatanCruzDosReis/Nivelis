@@ -1,0 +1,259 @@
+═══════════════════════════════════════════════════════════════════════════════
+  CORREÇÕES DE QUALIDADE — simulados_api.py
+  (as mesmas 3 melhorias do questoes_api.py, adaptadas)
+═══════════════════════════════════════════════════════════════════════════════
+
+  São 5 edições. Cada uma tem: ONDE achar + O QUE fazer.
+  Recomendo fazer na ordem. Faça backup antes (copie o arquivo).
+
+  RESUMO DAS MUDANÇAS:
+    1. Adicionar a função de validação (helpers + validar_questao)
+    2. Chamar a validação dentro de salvar_questoes_banco (protege as 3 rotas)
+    3. Reforçar o prompt do ENADE (/enade/inspirar)
+    4. Reforçar o prompt do ENEM (/enem/inspirar)
+    5. Reforçar o prompt do LIVRO (/livro/inspirar)
+    + baixar temperatura de 0.7 → 0.3 nas 3 gerações
+
+═══════════════════════════════════════════════════════════════════════════════
+  EDIÇÃO 1 — ADICIONAR A VALIDAÇÃO
+═══════════════════════════════════════════════════════════════════════════════
+
+ONDE: logo depois do bloco que configura o Gemini (depois da linha
+      "modelo = genai.GenerativeModel(GEMINI_MODEL)"), antes de "CONFIGURAÇÃO DA API".
+
+O QUE: cole este bloco inteiro:
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  VALIDAÇÃO DE QUALIDADE DAS QUESTÕES (antes de salvar no banco)
+#  Descarta questões com gabarito inconsistente ou explicação com rascunho.
+# ══════════════════════════════════════════════════════════════════════════════
+
+import re as _re_validacao
+
+SINAIS_EXPLICACAO_RUIM = [
+    "oops", "houve um erro", "houve um equívoco", "houve um engano",
+    "vamos refazer", "vamos recalcular", "vamos revisar", "vamos verificar",
+    "vamos analisar novamente", "ainda não cheguei", "parece que me confundi",
+    "há um erro na minha", "me enganei", "vamos calcular novamente",
+    "parece incorreta", "vamos reavaliar", "está inconsistente",
+]
+
+
+def _extrair_numeros(texto: str):
+    """Extrai números de um texto, tratando formato BR (1.987,50 -> 1987.50)."""
+    if not texto:
+        return []
+    numeros = []
+    for match in _re_validacao.finditer(r'\d{1,3}(?:\.\d{3})*(?:,\d+)?|\d+(?:,\d+)?|\d+(?:\.\d+)?', texto):
+        s = match.group()
+        if ',' in s:
+            s_norm = s.replace('.', '').replace(',', '.')
+        elif s.count('.') == 1 and len(s.split('.')[-1]) <= 2:
+            s_norm = s
+        else:
+            s_norm = s.replace('.', '')
+        try:
+            numeros.append(float(s_norm))
+        except ValueError:
+            pass
+    return numeros
+
+
+def validar_questao(q: dict) -> tuple:
+    """
+    Valida uma questão gerada. Retorna (ok: bool, motivo: str).
+    Checa: campos essenciais, gabarito aponta alternativa existente,
+    explicação sem rascunho, e (cálculo) valor final bate com o gabarito.
+    """
+    enunciado    = q.get("enunciado", "")
+    alternativas = q.get("alternativas", {})
+    gabarito     = str(q.get("gabarito", "")).upper().strip()
+    explicacao   = q.get("explicacao", "")
+
+    if not enunciado or not alternativas or not gabarito:
+        return False, "faltam campos essenciais"
+
+    if not isinstance(alternativas, dict):
+        return False, "alternativas em formato inesperado"
+
+    letras = {k.upper() for k in alternativas.keys()}
+    if gabarito not in letras:
+        return False, f"gabarito '{gabarito}' nao existe nas alternativas"
+
+    expl_low = explicacao.lower()
+    for sinal in SINAIS_EXPLICACAO_RUIM:
+        if sinal in expl_low:
+            return False, f"explicacao contem rascunho ('{sinal}')"
+
+    txt_gabarito  = str(alternativas.get(gabarito, ""))
+    nums_gabarito = _extrair_numeros(txt_gabarito)
+    nums_expl     = _extrair_numeros(explicacao)
+
+    if nums_gabarito and nums_expl:
+        ultimos = nums_expl[-3:]
+
+        def _proximo(a, b, tol=0.02):
+            if b == 0:
+                return abs(a - b) < 0.01
+            return abs(a - b) / abs(b) < tol
+
+        bate = any(_proximo(ne, ng) for ne in ultimos for ng in nums_gabarito)
+        if not bate:
+            return False, f"explicacao calcula valor diferente do gabarito {gabarito}"
+
+    return True, ""
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  EDIÇÃO 2 — VALIDAR DENTRO DE salvar_questoes_banco (protege as 3 rotas)
+═══════════════════════════════════════════════════════════════════════════════
+
+ONDE: a função "def salvar_questoes_banco(...)". O corpo atual é assim:
+
+    gabarito_map = {g["numero"]: g for g in gabarito}
+
+    for q in questoes:
+        num = q["numero"]
+        gb  = gabarito_map.get(num, {})
+
+        db.collection("questoes").add({
+            ...
+        })
+
+    print(f"[FIREBASE] {len(questoes)} questões salvas no banco")
+
+SUBSTITUA todo o corpo por este (adiciona a validação antes do add):
+
+    gabarito_map = {g["numero"]: g for g in gabarito}
+    salvas     = 0
+    descartadas = 0
+
+    for q in questoes:
+        num = q["numero"]
+        gb  = gabarito_map.get(num, {})
+
+        # Monta objeto pra validação (junta questão + gabarito)
+        q_para_validar = {
+            "enunciado":    q.get("enunciado", ""),
+            "alternativas": q.get("alternativas", {}),
+            "gabarito":     gb.get("resposta_correta", ""),
+            "explicacao":   gb.get("explicacao", ""),
+        }
+        ok, motivo = validar_questao(q_para_validar)
+        if not ok:
+            descartadas += 1
+            print(f"[VALIDAÇÃO] ✗ Questão {num} descartada: {motivo}")
+            continue
+
+        db.collection("questoes").add({
+            "concurso":          concurso,
+            "ano":               ano,
+            "materia":           materia,
+            "numero_questao":    num,
+            "enunciado":         q["enunciado"],
+            "alternativas":      q["alternativas"],
+            "gabarito":          gb.get("resposta_correta", "?"),
+            "explicacao_ia":     gb.get("explicacao", ""),
+            "tem_elemento_visual": q.get("tem_elemento_visual", False),
+            "validado":          True,
+            "ativo":             True,
+            "criado_em":         datetime.now(timezone.utc)
+        })
+        salvas += 1
+
+    if descartadas:
+        print(f"[VALIDAÇÃO] {descartadas} questão(ões) descartada(s) por qualidade.")
+    print(f"[FIREBASE] {salvas} questões salvas no banco")
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  EDIÇÃO 3 — REFORÇAR O PROMPT DO ENADE (/enade/inspirar)
+═══════════════════════════════════════════════════════════════════════════════
+
+ONDE: dentro de "gerar_questoes_inspiradas_enade", no "prompt_geracao".
+      Procure o trecho que lista as REGRAS IMPORTANTES do ENADE.
+
+DEPOIS da linha:
+    - Os LIVROS (se houver) servem como REFORÇO/COMPLEMENTO de conteúdo
+
+ADICIONE (logo antes de "{instrucao_dificuldade}..."):
+
+- RESOLVA cada questão completamente ANTES de definir o gabarito
+- O campo "gabarito" DEVE ser a letra cuja alternativa corresponde EXATAMENTE
+  ao resultado da explicação. NUNCA aponte letra diferente do que calculou
+- A explicação deve TERMINAR no resultado final, sem rascunho, sem "vamos
+  recalcular", sem "oops". Escreva a resolução limpa de uma vez
+- Se o resultado não bate com nenhuma alternativa, REFAÇA a questão
+
+E MUDE a temperatura dessa geração:
+    "temperature":        0.7,
+para:
+    "temperature":        0.3,
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  EDIÇÃO 4 — REFORÇAR O PROMPT DO ENEM (/enem/inspirar)
+═══════════════════════════════════════════════════════════════════════════════
+
+ONDE: dentro de "gerar_questoes_inspiradas_enem", no "prompt_geracao".
+      Procure as REGRAS do ENEM.
+
+DEPOIS da linha:
+    - Os LIVROS (se houver) servem como REFORÇO/COMPLEMENTO de conteúdo
+
+ADICIONE:
+
+- RESOLVA cada questão completamente ANTES de definir o gabarito
+- O campo "gabarito" DEVE ser a letra cuja alternativa corresponde EXATAMENTE
+  ao resultado da explicação. NUNCA aponte letra diferente do que calculou
+- A explicação deve TERMINAR no resultado final, sem rascunho, sem "vamos
+  recalcular", sem "oops". Escreva a resolução limpa de uma vez
+- Se o resultado não bate com nenhuma alternativa, REFAÇA a questão
+
+E MUDE a temperatura:
+    "temperature":        0.7,
+para:
+    "temperature":        0.3,
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  EDIÇÃO 5 — REFORÇAR O PROMPT DO LIVRO (/livro/inspirar)
+═══════════════════════════════════════════════════════════════════════════════
+
+ONDE: dentro de "gerar_questoes_inspiradas_livro", no "prompt".
+      Procure as REGRAS do livro.
+
+DEPOIS da linha:
+    - Cobre os tópicos listados
+
+ADICIONE:
+
+- RESOLVA cada questão completamente ANTES de definir o gabarito
+- O campo "gabarito" DEVE ser a letra cuja alternativa corresponde EXATAMENTE
+  ao resultado da explicação. NUNCA aponte letra diferente do que calculou
+- A explicação deve TERMINAR no resultado, sem rascunho, sem "vamos recalcular"
+- Se o resultado não bate com nenhuma alternativa, REFAÇA a questão
+
+A temperatura do livro já está 0.5 (aceitável). Se quiser padronizar, baixe para 0.3:
+    "temperature":        0.5,
+para:
+    "temperature":        0.3,
+
+
+═══════════════════════════════════════════════════════════════════════════════
+  DEPOIS DE APLICAR
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Salve o arquivo.
+2. Teste local:
+     uvicorn simulados_api:app --reload
+3. Abra http://localhost:8000/docs
+4. Teste POST /enade/inspirar com ano=2023, area=matematica (ou uma de cálculo),
+   quantidade=5.
+5. Veja nos logs do terminal se aparece:
+     [VALIDAÇÃO] ✗ Questão X descartada: ...
+   (isso confirma que a validação está barrando questões ruins)
+6. Se estiver tudo certo: git add, commit, push (deploy no Render).
+
+OBS: como a validação está em salvar_questoes_banco, ela protege TODAS as rotas
+que salvam questões (enade, enem, livro, extrair, pool) de uma vez só.
