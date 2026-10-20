@@ -1,0 +1,38 @@
+ESTA PASTA NÃO FAZ PARTE DO APLICATIVO.
+========================================
+
+O que é
+-------
+Uma cópia antiga da tela de cronograma, guardada como segurança.
+Antes chamava "recente", nome que dava a entender exatamente o contrário
+do que ela é: a versão VELHA.
+
+Quem é a tela de verdade
+------------------------
+    src/pages/enade/card_enade/cronograma/index.tsx
+
+É essa que o aplicativo carrega. Confirmado em:
+    src/routes/index.tsx, linha 22
+    import Cronograma from '../pages/enade/card_enade/cronograma/index';
+
+Nada importa esta pasta aqui. Nenhuma rota, nenhum arquivo, nenhuma
+string. Portanto ela nunca executa — o risco não é o aplicativo quebrar,
+é alguém editar o arquivo errado.
+
+Por que não editar este arquivo
+-------------------------------
+Ele ficou parado em 06/10/2026 e ainda tem dois defeitos que a tela de
+verdade já não tem:
+
+1. O índice de fim do evento soma meia hora a mais. Um evento marcado
+   "09:00 - 11:00" é pintado até 11:30, discordando do próprio horário
+   escrito embaixo do nome. E "07:00 - 07:00" passa pela validação e vira
+   um evento de duração zero ocupando meia hora na semana.
+
+2. O botão "excluir" apaga o evento na hora, sem perguntar e sem desfazer,
+   num alvo de toque de uns 20px colado no botão "editar".
+
+Se precisar consultar como era antes, leia. Se precisar MUDAR alguma
+coisa, mude em cronograma/index.tsx.
+
+Pode apagar esta pasta inteira quando não precisar mais da cópia.

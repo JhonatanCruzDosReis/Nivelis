@@ -1,0 +1,72 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  ESTE ARQUIVO IMPEDE QUE SEGREDOS E DADOS DE USUÁRIO VÃO PARA O GITHUB.
+#
+#  O padrão do Expo cobre só node_modules e cache. Não cobria o .env (que
+#  guardava a chave do GNews), o google-services.json, nem o
+#  src/services/nivelis_backup.db — que contém uma tabela `usuarios` com
+#  dados reais de pessoas.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Segredos ────────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.local
+
+# Credenciais e configuração de serviço.
+#
+# Padrões amplos de propósito: adivinhar o nome exato do arquivo é como esta
+# regra falha. No repositório da API havia um `chave-nivelis.json` que passou
+# batido porque a regra listava `chave-firebase.json`.
+*chave*.json
+google-services.json
+GoogleService-Info.plist
+*service-account*.json
+*-credentials.json
+firebase-adminsdk*.json
+*.pem
+*.key
+*.p8
+*.p12
+*.jks
+*.keystore
+*.mobileprovision
+
+# ── Dados de usuário ────────────────────────────────────────────────────────
+#
+# O nivelis_backup.db tem uma tabela `usuarios`. Banco local nunca vai para
+# o repositório: uma vez enviado, continua no histórico mesmo que apagado.
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Expo e build ────────────────────────────────────────────────────────────
+node_modules/
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+/ios
+/android
+.kotlin/
+*.orig.*
+.metro-health-check*
+*.tsbuildinfo
+
+# ── Logs ────────────────────────────────────────────────────────────────────
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+*.log
+
+# ── Cópias visíveis dos arquivos ocultos ────────────────────────────────────
+# (os pacotes vêm com uma cópia .txt para o Windows não esconder o original)
+gitignore.txt
+env.example.txt
+
+# ── Sistema e editores ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
